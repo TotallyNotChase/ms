@@ -18,20 +18,24 @@ func NewBlock(name string, albums ...Album) *Block {
 	}
 }
 
+// Add an album to the block.
+func (b *Block) Add(al Album) {
+}
+
 // RemoveAlbum gets rid of an instance of album on the given block.
-func (block Block) RemoveAlbum(album Album) {
+func (b *Block) RemoveAlbum(album Album) {
 	var newAlbums []Album
 
-	for _, blockAlbum := range block.Albums {
+	for _, blockAlbum := range b.Albums {
 		if album != blockAlbum {
 			newAlbums = append(newAlbums, album)
 		}
 	}
 
-	block.Albums = newAlbums
+	b.Albums = newAlbums
 }
 
 // ReplaceAlbum iterates through the list of albums and replaces an album
 // with a new one.
-func (block Block) ReplaceAlbum(old, actual Album) {
+func (b *Block) ReplaceAlbum(old, actual Album) {
 }
