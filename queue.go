@@ -5,14 +5,14 @@ type Queue struct {
 	Block [4]*Block `json:"block"`
 }
 
-// AddBlock appends a block to the queue and gets rid of any old ones.
-func AddBlock(q Queue) {
+// Add a block to the queue and get rid of any old ones.
+func (q *Queue) Add(b *Block) {
 }
 
-// ReplaceInBlock goes through the given queue and replaces an album for a new one.
-func ReplaceInBlock(q Queue, old, actual Album) {
+// Replace goes through the queue and replaces an album for a new one.
+func (q *Queue) Replace(old, actual Album) {
 }
 
 // ShowCurrent prints the current week of records in the queue.
-func ShowCurrent(q Queue) {
+func (q *Queue) ShowCurrent() {
 }
