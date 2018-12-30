@@ -20,6 +20,7 @@ func NewBlock(name string, albums ...Album) *Block {
 
 // Add an album to the block.
 func (b *Block) Add(al Album) {
+	b.Albums = append(b.Albums, al)
 }
 
 // RemoveAlbum gets rid of an instance of album on the given block.
@@ -38,4 +39,10 @@ func (b *Block) RemoveAlbum(album Album) {
 // ReplaceAlbum iterates through the list of albums and replaces an album
 // with a new one.
 func (b *Block) ReplaceAlbum(old, actual Album) {
+	for i, al := range b.Albums {
+		if al == old {
+			b.Albums[i] = actual
+			break
+		}
+	}
 }
