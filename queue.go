@@ -17,11 +17,21 @@ func (q *Queue) Add(b *Block) {
 	q[0] = b
 }
 
+// Load queue from disk.
+func (q *Queue) Load() error {
+	return jsonfile.LoadFile(q, "queue.json")
+}
+
 // Replace goes through the queue and replaces an album for a new one.
 func (q *Queue) Replace(old, actual Album) {
 	for _, block := range q {
 		block.ReplaceAlbum(old, actual)
 	}
+}
+
+// Save queue to disk.
+func (q *Queue) Save() error {
+	return jsonfile.SaveFile(q, "queue.json")
 }
 
 // ShowCurrent prints the current week of records in the queue.
@@ -34,14 +44,4 @@ func (q *Queue) ShowCurrent() {
 			}
 		}
 	}
-}
-
-// Load queue from disk.
-func (q *Queue) Load() error {
-	return jsonfile.LoadFile(q, "queue.json")
-}
-
-// Save queue to disk.
-func (q *Queue) Save() error {
-	return jsonfile.SaveFile(q, "queue.json")
 }
