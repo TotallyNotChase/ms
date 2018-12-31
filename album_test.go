@@ -10,13 +10,13 @@ var (
 	foo  Album = "foo"
 	bar  Album = "bar"
 	al         = []Album{foo, bar}
-	bRef       = &Block{name, al}
+	bRef       = Block{name, al}
 )
 
 func TestNewBlock(t *testing.T) {
 	bNew := NewBlock(name, foo, bar)
 
-	if !cmp.Equal(bRef, bNew) {
+	if !cmp.Equal(&bRef, bNew) {
 		t.Error("ms | Error with NewBlock: generated struct not equal to testing one")
 	}
 }
