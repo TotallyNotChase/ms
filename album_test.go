@@ -50,6 +50,13 @@ func TestRemoveAlbum(t *testing.T) {
 			t.Errorf("\t%d. %s\n", i+1, album)
 		}
 	}
+
+	bEmpty := &Block{}
+	bEmpty.RemoveAlbum(foo)
+
+	if !cmp.Equal(bEmpty, &Block{}) {
+		t.Error("ms | Error with RemoveAlbum: not working on empty block")
+	}
 }
 
 func TestReplaceAlbum(t *testing.T) {
