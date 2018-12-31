@@ -24,12 +24,12 @@ func (b *Block) Add(al Album) {
 }
 
 // RemoveAlbum gets rid of an instance of album on the given block.
-func (b *Block) RemoveAlbum(album Album) {
+func (b *Block) RemoveAlbum(al Album) {
 	var newAlbums []Album
 
-	for _, blockAlbum := range b.Albums {
-		if album != blockAlbum {
-			newAlbums = append(newAlbums, album)
+	for _, blockAl := range b.Albums {
+		if al != blockAl {
+			newAlbums = append(newAlbums, blockAl)
 		}
 	}
 
