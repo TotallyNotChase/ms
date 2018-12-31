@@ -17,6 +17,10 @@ var (
 func TestNewBlock(t *testing.T) {
 	bNew := NewBlock(name, foo, bar)
 
+	if bNew == nil {
+		t.Error("ms | Error with NewBlock: nil pointer")
+	}
+
 	if !cmp.Equal(&bRef, bNew) {
 		t.Error("ms | Error with NewBlock: generated struct not equal to testing one")
 	}
