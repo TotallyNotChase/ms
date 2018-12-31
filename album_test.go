@@ -5,16 +5,15 @@ import (
 	"testing"
 )
 
+var (
+	name       = "nice"
+	foo  Album = "foo"
+	bar  Album = "bar"
+	al         = []Album{foo, bar}
+	bRef       = &Block{name, al}
+)
+
 func TestNewBlock(t *testing.T) {
-	var (
-		name       = "nice"
-		foo  Album = "foo"
-		bar  Album = "bar"
-		al         = []Album{foo, bar}
-	)
-
-	bRef := &Block{name, al}
-
 	bNew := NewBlock(name, foo, bar)
 
 	if !cmp.Equal(bRef, bNew) {
