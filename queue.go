@@ -1,9 +1,11 @@
 package main
 
 // Queue is the overall scheduler, consisting of 4 blocks.
-type Queue struct {
-	Block [4]*Block `json:"block"`
-}
+type Queue [4]*Block
+
+// type Queue struct {
+// 	Blocks [4]*Block `json:"block"`
+// }
 
 // Add a block to the queue and get rid of any old ones.
 func (q *Queue) Add(b *Block) {
