@@ -47,3 +47,19 @@ func TestRemoveAlbum(t *testing.T) {
 		}
 	}
 }
+
+func TestReplaceAlbum(t *testing.T) {
+	tmp := bRef
+	b := &tmp
+
+	bReplaced := &Block{
+		Name:   name,
+		Albums: []Album{foo, foo},
+	}
+
+	b.ReplaceAlbum(bar, foo)
+
+	if !cmp.Equal(b, bReplaced) {
+		t.Error("ms | Error with ReplaceAlbum: generated struct not equal to testing one")
+	}
+}
