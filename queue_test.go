@@ -40,4 +40,12 @@ func TestAddBlock(t *testing.T) {
 		fmt.Println("\nNew:")
 		q.ShowCurrent()
 	}
+
+	q2 := &Queue{}
+	q2.Add(b)
+	q3 := &Queue{b}
+
+	if !cmp.Equal(q2, q3) {
+		t.Error("ms | Error with AddBlock: couldn't add properly to empty queue")
+	}
 }
