@@ -6,8 +6,8 @@ import (
 
 // APIKey hold the public and secret keys for accessing Last.FM's API.
 type APIKey struct {
-	Key    string
-	Secret string
+	Key    string `json:"key"`
+	Secret string `json:"secret"`
 }
 
 // Load the keys from a JSON file.
