@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"runtime"
+	"strings"
 	"sync"
 	"time"
 
@@ -23,7 +24,7 @@ type downData struct {
 }
 
 // GetArtwork concurrently downloads the cover for the given album on the given
-// directory as "Artist - Album.png". The given results channel sends a success
+// directory. The given results channel sends a success
 // mesage if an image was downloaded correctly, and any errors are sent to the
 // errs channel. A WaitGroup is used to sync all goroutines.
 func GetArtwork(api *lastfm.Api, album string, dir string, results chan string, errs chan error, wg *sync.WaitGroup) {
@@ -54,7 +55,7 @@ func GetArtwork(api *lastfm.Api, album string, dir string, results chan string, 
 			if image.Size == "large" && image.Url != "" {
 				data := downData{
 					url:  image.Url,
-					name: match.Name,
+					name: strings.Replace(match.Name, "/", " ", -1),
 					dir:  dir,
 				}
 
@@ -79,7 +80,7 @@ func downImage(datach chan downData, results chan string, errs chan error, wg *s
 		defer func() {
 			err := response.Body.Close()
 			if err != nil {
-				errs <- err
+				errs <- fmt.Errorf("Error with closing the response: %s", err)
 			}
 		}()
 
@@ -87,13 +88,13 @@ func downImage(datach chan downData, results chan string, errs chan error, wg *s
 			errs <- fmt.Errorf("Error: Null response for %s", data.url)
 			return
 		}
-
 		if err != nil {
 			errs <- fmt.Errorf("Error fetching URL %s: %s", data.url, err)
 			return
 		}
 
 		fileName := data.dir + "/" + data.name + ".png"
+
 		file, err := os.Create(fileName)
 		if err != nil {
 			errs <- fmt.Errorf("Error while creating file %s: %s", fileName, err)
