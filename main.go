@@ -22,8 +22,8 @@ func main() {
 
 	// Testing
 	var wg sync.WaitGroup
-	results := make(chan string)
-	errs := make(chan error)
+	results := make(chan string, 3)
+	errs := make(chan error, 3)
 
 	go func() {
 		for {
@@ -36,7 +36,7 @@ func main() {
 		}
 	}()
 
-	GetArtwork(api, "thriller", "cache/week 1", results, errs, &wg)
+	GetArtwork(api, "pink floyd", "cache/week 1", results, errs, &wg)
 
 	wg.Wait()
 	close(results)
