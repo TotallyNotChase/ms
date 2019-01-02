@@ -22,8 +22,10 @@ type downData struct {
 	dir  string
 }
 
-// GetArtwork downloads the cover for the given album on the given directory
-// as "Artist - Album.png".
+// GetArtwork concurrently downloads the cover for the given album on the given
+// directory as "Artist - Album.png". The given results channel sends a success
+// mesage if an image was downloaded correctly, and any errors are sent to the
+// errs channel. A WaitGroup is used to sync all goroutines.
 func GetArtwork(api *lastfm.Api, album string, dir string, results chan string, errs chan error, wg *sync.WaitGroup) {
 	al, err := api.Album.Search(lastfm.P{
 		"album": album,
