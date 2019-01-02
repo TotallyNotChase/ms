@@ -53,9 +53,15 @@ func GetArtwork(api *lastfm.Api, album string, dir string, results chan string, 
 		for _, image := range match.Images {
 			// Only work with big images
 			if image.Size == "large" && image.Url != "" {
+				filename := strings.Replace(match.Name, "/", " ", -1)
+				// Don't download if it's already cached!
+				if _, err := os.Stat(dir + "/" + filename + ".png"); !os.IsNotExist(err) {
+					break
+				}
+
 				data := downData{
 					url:  image.Url,
-					name: strings.Replace(match.Name, "/", " ", -1),
+					name: filename,
 					dir:  dir,
 				}
 
