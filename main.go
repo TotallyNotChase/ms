@@ -38,6 +38,9 @@ func status() {
 	q := &Queue{}
 	err := q.Load()
 	if err != nil {
+		if q.Save() != nil {
+			fmt.Println(err)
+		}
 		fmt.Println(err)
 		os.Exit(1)
 	}
