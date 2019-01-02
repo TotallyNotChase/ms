@@ -23,6 +23,37 @@ type downData struct {
 	dir  string
 }
 
+// LookupArtwork concurrently looks for the given search and saves results
+// to the given directory. If verbose is True, it will print both errors
+// and results of downloading a cover.
+func LookupArtwork(api *lastfm.Api, search, dir string, verbose bool) {
+	var wg sync.WaitGroup
+	results := make(chan string, 3)
+	errs := make(chan error, 3)
+
+	go func() {
+		for {
+			select {
+			case res := <-results:
+				if verbose {
+					fmt.Println(res)
+				}
+			case err := <-errs:
+				if verbose {
+					fmt.Println(err)
+				}
+			}
+		}
+	}()
+
+	GetArtwork(api, search, dir, results, errs, &wg)
+
+	wg.Wait()
+	close(results)
+	close(errs)
+
+}
+
 // GetArtwork concurrently downloads the cover for the given album on the given
 // directory. The given results channel sends a success
 // mesage if an image was downloaded correctly, and any errors are sent to the

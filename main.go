@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"sync"
 
 	"github.com/shkh/lastfm-go/lastfm"
 )
@@ -21,24 +20,5 @@ func main() {
 	api := lastfm.New(apiKey.Key, apiKey.Secret)
 
 	// Testing
-	var wg sync.WaitGroup
-	results := make(chan string, 3)
-	errs := make(chan error, 3)
-
-	go func() {
-		for {
-			select {
-			case res := <-results:
-				fmt.Println(res)
-			case err := <-errs:
-				fmt.Println(err)
-			}
-		}
-	}()
-
-	GetArtwork(api, "pink floyd", "cache/week 1", results, errs, &wg)
-
-	wg.Wait()
-	close(results)
-	close(errs)
+	LookupArtwork(api, "dark side of the moon", "cache/week 2", false)
 }
