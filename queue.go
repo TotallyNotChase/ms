@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 
+	"github.com/adrg/xdg"
 	"gitlab.com/Sacules/jsonfile"
 )
 
 const (
-	configDir = "~/.config/ms/"
+	app = "/ms"
 )
 
 // Queue is the overall scheduler, consisting of 4 blocks.
@@ -29,12 +30,12 @@ func (q *Queue) Add(b *Block) {
 
 // Load queue from disk.
 func (q *Queue) Load() error {
-	err := createDirNotExist(configDir)
+	err := createDirNotExist(xdg.ConfigHome + app)
 	if err != nil {
 		return err
 	}
 
-	return jsonfile.LoadFile(q, configDir+"current.json")
+	return jsonfile.LoadFile(q, xdg.ConfigHome+app+"/current.json")
 }
 
 // Replace goes through the queue and replaces an album for a new one.
@@ -46,12 +47,12 @@ func (q *Queue) Replace(old, actual Album) {
 
 // Save queue to disk.
 func (q *Queue) Save() error {
-	err := createDirNotExist(configDir)
+	err := createDirNotExist(xdg.ConfigHome + app)
 	if err != nil {
 		return err
 	}
 
-	return jsonfile.SaveFile(q, "~/.config/ms/current.json")
+	return jsonfile.SaveFile(q, xdg.ConfigHome+app+"/current.json")
 }
 
 // ShowCurrent prints the current week of records in the queue.
