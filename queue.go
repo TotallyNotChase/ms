@@ -6,6 +6,10 @@ import (
 	"gitlab.com/Sacules/jsonfile"
 )
 
+const (
+	configDir = "~/.config/ms/"
+)
+
 // Queue is the overall scheduler, consisting of 4 blocks.
 type Queue [4]*Block
 
@@ -25,7 +29,12 @@ func (q *Queue) Add(b *Block) {
 
 // Load queue from disk.
 func (q *Queue) Load() error {
-	return jsonfile.LoadFile(q, "queue.json")
+	err := createDirNotExist(configDir)
+	if err != nil {
+		return err
+	}
+
+	return jsonfile.LoadFile(q, configDir+"current.json")
 }
 
 // Replace goes through the queue and replaces an album for a new one.
@@ -37,7 +46,12 @@ func (q *Queue) Replace(old, actual Album) {
 
 // Save queue to disk.
 func (q *Queue) Save() error {
-	return jsonfile.SaveFile(q, "queue.json")
+	err := createDirNotExist(configDir)
+	if err != nil {
+		return err
+	}
+
+	return jsonfile.SaveFile(q, "~/.config/ms/current.json")
 }
 
 // ShowCurrent prints the current week of records in the queue.
