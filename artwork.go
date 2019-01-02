@@ -15,7 +15,6 @@ func GetArtwork(api *lastfm.Api, artist, album string, dir string) error {
 		"artist": artist,
 		"album":  album,
 	})
-
 	if err != nil {
 		return err
 	}
@@ -23,17 +22,14 @@ func GetArtwork(api *lastfm.Api, artist, album string, dir string) error {
 	for _, image := range al.Images {
 		if image.Size == "large" {
 			response, err := http.Get(image.Url)
+			defer response.Body.Close()
 			if err != nil {
 				return err
 			}
 
-			defer response.Body.Close()
-
-			if _, err = os.Stat(dir); os.IsNotExist(err) {
-				err = os.MkdirAll(dir, 0755)
-				if err != nil {
-					return err
-				}
+			err = createDirNotExist(dir)
+			if err != nil {
+				return err
 			}
 
 			file, err := os.Create(dir + "/" + artist + " - " + album + ".png")
@@ -45,7 +41,17 @@ func GetArtwork(api *lastfm.Api, artist, album string, dir string) error {
 			if err != nil {
 				return err
 			}
+
+			return nil
 		}
+	}
+
+	return nil
+}
+
+func createDirNotExist(dir string) error {
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		return os.MkdirAll(dir, 0755)
 	}
 
 	return nil
