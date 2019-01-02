@@ -1,13 +1,22 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 
 	"github.com/shkh/lastfm-go/lastfm"
 )
 
+var (
+	// Flags
+	verbose bool
+)
+
 func main() {
+	flag.BoolVar(&verbose, "v", false, "verbose mode")
+	flag.Parse()
+
 	apiKey := &APIKey{}
 	err := apiKey.Load()
 	if err != nil {
@@ -20,5 +29,5 @@ func main() {
 	api := lastfm.New(apiKey.Key, apiKey.Secret)
 
 	// Testing
-	LookupArtwork(api, "dark side of the moon", "cache/week 2", false)
+	LookupArtwork(api, "dark side of the moon", "cache/week 2", verbose)
 }
