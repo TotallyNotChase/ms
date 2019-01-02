@@ -147,11 +147,3 @@ func downImage(datach chan downData, results chan string, errs chan error, wg *s
 		results <- "Sucessfully downloaded " + data.name
 	}
 }
-
-func createDirNotExist(dir string) error {
-	if _, err := os.Stat(dir); os.IsNotExist(err) {
-		return os.MkdirAll(dir, 0755)
-	}
-
-	return nil
-}
