@@ -39,7 +39,7 @@ func main() {
 }
 
 func status() {
-	q := &Queue{}
+	var q = NewQueue()
 	err := q.Load()
 	if err != nil {
 		if q.Save() != nil {
