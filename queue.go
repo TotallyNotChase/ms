@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"text/tabwriter"
 
 	"github.com/adrg/xdg"
 	"gitlab.com/Sacules/jsonfile"
@@ -57,12 +59,26 @@ func (q *Queue) Save() error {
 
 // ShowCurrent prints the current week of records in the queue.
 func (q *Queue) ShowCurrent() {
+	var (
+		w = tabwriter.NewWriter(os.Stdout, 0, 8, 2, '\t', tabwriter.AlignRight)
+	)
+
 	for _, block := range q {
 		if block != nil {
-			fmt.Printf("\n%s\n", block.Name)
-			for i, album := range block.Albums {
-				fmt.Printf("%d. %s\n", i+1, album)
+			fmt.Fprintf(w, "\n%s\n", block.Name)
+			for _, album := range block.Albums {
+				var listened, rated = "No", "No"
+
+				if album.Listened {
+					listened = "Yes"
+				}
+				if album.Rated {
+					rated = "Yes"
+				}
+
+				fmt.Fprintf(w, "%s\t%s\t%s\n", album.Name, listened, rated)
 			}
 		}
 	}
+	w.Flush()
 }
