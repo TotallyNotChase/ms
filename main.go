@@ -88,7 +88,7 @@ records:
 			break
 		}
 
-		albums[i] = Album(al)
+		albums[i].Name = al
 	}
 
 	b := NewBlock(name, albums...)
