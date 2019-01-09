@@ -9,6 +9,6 @@ type Album struct {
 }
 
 // NewAlbum returns a pointer to an empty Album.
-func NewAlbum(al string) *Album {
-	return &Album{Name: al}
+func NewAlbum(al string) Album {
+	return Album{Name: al}
 }
