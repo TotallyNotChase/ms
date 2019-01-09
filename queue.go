@@ -59,9 +59,7 @@ func (q *Queue) Save() error {
 
 // ShowCurrent prints the current week of records in the queue.
 func (q *Queue) ShowCurrent() {
-	var (
-		w = tabwriter.NewWriter(os.Stdout, 0, 8, 2, '\t', 0)
-	)
+	w := tabwriter.NewWriter(os.Stdout, 0, 8, 2, '\t', 0)
 
 	fmt.Fprintf(w, "%s\t%s\t%s\n", "Block", "Listened", "Rated")
 	fmt.Fprintf(w, "\t\t\n")
