@@ -60,24 +60,27 @@ func (q *Queue) Save() error {
 // ShowCurrent prints the current week of records in the queue.
 func (q *Queue) ShowCurrent() {
 	var (
-		w = tabwriter.NewWriter(os.Stdout, 0, 8, 2, '\t', tabwriter.AlignRight)
+		w = tabwriter.NewWriter(os.Stdout, 0, 8, 2, '\t', tabwriter.Debug)
 	)
 
+	fmt.Fprintf(w, "%s\t%s\t%s\n", "Block", "Listened", "Rated")
+	fmt.Fprintf(w, "\t\t\n")
 	for _, block := range q {
 		if block != nil {
-			fmt.Fprintf(w, "\n%s\n", block.Name)
+			fmt.Fprintf(w, "%s\t\t\n", block.Name)
 			for _, album := range block.Albums {
-				var listened, rated = "No", "No"
+				var listened, rated = "❌", "❌"
 
 				if album.Listened {
-					listened = "Yes"
+					listened = "✓"
 				}
 				if album.Rated {
-					rated = "Yes"
+					rated = "✓"
 				}
 
 				fmt.Fprintf(w, "%s\t%s\t%s\n", album.Name, listened, rated)
 			}
+			fmt.Fprintf(w, "\t\t\n")
 		}
 	}
 	w.Flush()
