@@ -7,11 +7,11 @@ import (
 )
 
 var (
-	name       = "nice"
-	foo  Album = "foo"
-	bar  Album = "bar"
-	al         = []Album{foo, bar}
-	bRef       = Block{name, al}
+	name = "nice"
+	foo  = NewAlbum("foo")
+	bar  = NewAlbum("bar")
+	al   = []Album{foo, bar}
+	bRef = Block{name, al}
 )
 
 func TestNewBlock(t *testing.T) {
@@ -42,12 +42,12 @@ func TestRemoveAlbum(t *testing.T) {
 
 		t.Error("Reference:")
 		for i, album := range bLess.Albums {
-			t.Errorf("\t%d. %s\n", i+1, album)
+			t.Errorf("\t%d. %s\n", i+1, album.Name)
 		}
 
 		t.Error("New one:")
 		for i, album := range b.Albums {
-			t.Errorf("\t%d. %s\n", i+1, album)
+			t.Errorf("\t%d. %s\n", i+1, album.Name)
 		}
 	}
 

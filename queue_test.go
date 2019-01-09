@@ -9,10 +9,10 @@ import (
 
 var (
 	qRef = Queue{
-		NewBlock("week 4", "nice", "nice"),
-		NewBlock("week 3", "placeholder"),
-		NewBlock("week 2", "fizz", "buzz", "fizbuzz"),
-		NewBlock("week 1", "foo", "bar", "foobar"),
+		NewBlock("week 4", NewAlbum("nice"), NewAlbum("nice")),
+		NewBlock("week 3", NewAlbum("placeholder")),
+		NewBlock("week 2", NewAlbum("fizz"), NewAlbum("buzz"), NewAlbum("fizbuzz")),
+		NewBlock("week 1", NewAlbum("foo"), NewAlbum("bar"), NewAlbum("foobar")),
 	}
 )
 
@@ -20,13 +20,13 @@ func TestAddBlock(t *testing.T) {
 	tmp := qRef
 	qLocal := &tmp
 
-	b := NewBlock("week 5", "darude - sandstorm")
+	b := NewBlock("week 5", NewAlbum("darude - sandstorm"))
 
 	q := &Queue{
 		b,
-		NewBlock("week 4", "nice", "nice"),
-		NewBlock("week 3", "placeholder"),
-		NewBlock("week 2", "fizz", "buzz", "fizbuzz"),
+		NewBlock("week 4", NewAlbum("nice"), NewAlbum("nice")),
+		NewBlock("week 3", NewAlbum("placeholder")),
+		NewBlock("week 2", NewAlbum("fizz"), NewAlbum("buzz"), NewAlbum("fizbuzz")),
 	}
 
 	qLocal.Add(b)
