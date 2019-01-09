@@ -72,12 +72,17 @@ records:
 	fmt.Printf("Amount of records for this week: ")
 	scanner.Scan()
 	num := scanner.Text()
+
 	n, err := strconv.Atoi(num)
+	if n <= 0 {
+		err = fmt.Errorf("amount of records must be an integer greater than 0")
+	}
 	if err != nil {
 		fmt.Printf("Error with amount of record: %s\n", err)
 		fmt.Println("Pleae try again.")
 		goto records
 	}
+
 	albums := make([]Album, n)
 
 	for i := 0; i < n; i++ {
