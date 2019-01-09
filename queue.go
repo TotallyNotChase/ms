@@ -76,7 +76,7 @@ func (q *Queue) ShowCurrent() {
 					rated = "✓"
 				}
 
-				fmt.Fprintf(w, "%s\t%s\t%s\n", album.Name, listened, rated)
+				fmt.Fprintf(w, "• %s\t%s\t%s\n", album.Name, listened, rated)
 			}
 			fmt.Fprintf(w, "\t\t\n")
 		}
