@@ -83,7 +83,7 @@ func (q *Queue) ShowCurrent() {
 						listened = "✓"
 					}
 
-				case 2:
+				case 3:
 					if album.ThirdListen {
 						listened = "✓"
 					}
