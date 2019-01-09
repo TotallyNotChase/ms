@@ -7,3 +7,8 @@ type Album struct {
 	Listened bool   `json:"listened"`
 	Rated    bool   `json:"rated"`
 }
+
+// NewAlbum returns a pointer to an empty Album.
+func NewAlbum(al string) *Album {
+	return &Album{Name: al}
+}
