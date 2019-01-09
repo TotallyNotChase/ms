@@ -63,15 +63,32 @@ func (q *Queue) ShowCurrent() {
 
 	fmt.Fprintf(w, "%s\t%s\t%s\n", "Block", "Listened", "Rated")
 	fmt.Fprintf(w, "\t\t\n")
-	for _, block := range q {
+	for i, block := range q {
 		if block != nil {
 			fmt.Fprintf(w, "%s\t\t\n", block.Name)
 			for _, album := range block.Albums {
-				var listened, rated = "❌", "❌"
+				var (
+					listened = "❌"
+					rated    = "❌"
+				)
 
-				if album.Listened {
-					listened = "✓"
+				switch i {
+				case 0:
+					if album.FirstListen {
+						listened = "✓"
+					}
+
+				case 1:
+					if album.SecondListen {
+						listened = "✓"
+					}
+
+				case 2:
+					if album.ThirdListen {
+						listened = "✓"
+					}
 				}
+
 				if album.Rated {
 					rated = "✓"
 				}
