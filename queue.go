@@ -64,7 +64,7 @@ func (q *Queue) ShowCurrent() {
 	fmt.Fprintf(w, "%s\t%s\t%s\n", "Block", "Listened", "Rated")
 	fmt.Fprintf(w, "\t\t\n")
 	for i, block := range q {
-		if block != nil {
+		if block != nil && i != 2 {
 			fmt.Fprintf(w, "%s\t\t\n", block.Name)
 			for _, album := range block.Albums {
 				var (
