@@ -86,7 +86,7 @@ func (q *Queue) ShowCurrent() {
 			for _, album := range block.Albums {
 				var (
 					listened = "❌"
-					rated    = "❌"
+					rated    = " "
 				)
 
 				switch i {
