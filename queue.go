@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 	"text/tabwriter"
 
 	"github.com/adrg/xdg"
@@ -59,10 +60,26 @@ func (q *Queue) Save() error {
 
 // ShowCurrent prints the current week of records in the queue.
 func (q *Queue) ShowCurrent() {
-	w := tabwriter.NewWriter(os.Stdout, 0, 8, 2, '\t', 0)
+	var (
+		w       = tabwriter.NewWriter(os.Stdout, 0, 8, 2, '\t', 0)
+		blankln = "\t\t\n"
+		headers = []string{
+			"Block",
+			"Listened",
+			"Rated",
+		}
+		underlined    = make([]string, len(headers))
+		headerstabbed = strings.Join(headers, "\t")
+	)
+	defer w.Flush()
 
-	fmt.Fprintf(w, "%s\t%s\t%s\n", "Block", "Listened", "Rated")
-	fmt.Fprintf(w, "\t\t\n")
+	// Calculate the right amount of underlines
+	for i, h := range headers {
+		underlined[i] = strings.Repeat("-", len(h))
+	}
+	underlinedtabbed := strings.Join(underlined, "\t")
+
+	fmt.Fprintln(w, headerstabbed+"\n"+underlinedtabbed)
 	for i, block := range q {
 		if block != nil && i != 2 {
 			fmt.Fprintf(w, "%s\t\t\n", block.Name)
@@ -95,8 +112,7 @@ func (q *Queue) ShowCurrent() {
 
 				fmt.Fprintf(w, "• %s\t%s\t%s\n", album.Name, listened, rated)
 			}
-			fmt.Fprintf(w, "\t\t\n")
+			fmt.Fprintf(w, blankln)
 		}
 	}
-	w.Flush()
 }
