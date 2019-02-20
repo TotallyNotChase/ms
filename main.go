@@ -1,36 +1,13 @@
 package main
 
-import (
-	"flag"
-	"os"
-)
-
 var (
 	// Flags
 	verbose bool
 )
 
 func main() {
-	flag.BoolVar(&verbose, "v", false, "verbose mode")
-	flag.Parse()
-	if len(os.Args) < 2 {
-		flag.Usage()
-		os.Exit(1)
-	}
+	tui := newTui()
 
-	switch os.Args[1] {
-	case "status":
-		status()
-
-	case "newblock":
-		newblock()
-
-	case "listen":
-		cmdListen()
-
-	case "rate":
-	case "newqueue":
-	default:
-		flag.PrintDefaults()
-	}
+	tui.init()
+	tui.run()
 }
