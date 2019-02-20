@@ -119,11 +119,14 @@ func (tui *tui) setupLooks() {
 func (tui *tui) setupBindings() {
 	// Main binds
 	tui.app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
-		if event.Rune() == 'q' {
+		// Quit
+		if event.Rune() == 'q' || event.Key() == tcell.KeyEsc {
 			tui.app.Stop()
 		}
 
-		if event.Key() == tcell.KeyTAB {
+		switch event.Key() {
+		// Move to the next block
+		case tcell.KeyTab:
 			// Reset on last block
 			if tui.currentblock == len(tui.blocks)-1 {
 				tui.currentblock = 0
@@ -132,9 +135,9 @@ func (tui *tui) setupBindings() {
 			}
 
 			tui.app.SetFocus(tui.blocks[tui.currentblock])
-		}
 
-		if event.Key() == tcell.KeyBacktab {
+		// Move to the previous block
+		case tcell.KeyBacktab:
 			if tui.currentblock == 0 {
 				tui.currentblock = len(tui.blocks) - 1
 			} else {
