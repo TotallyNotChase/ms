@@ -32,10 +32,6 @@ func main() {
 	default:
 		flag.PrintDefaults()
 	}
-
-	// Testing
-	// api := InitAPI()
-	// LookupArtwork(api, "dark side of the moon", "cache/week 2", verbose)
 }
 
 func status() {
