@@ -86,12 +86,22 @@ func cmdListen() {
 		os.Exit(1)
 	}
 
+	// Ensure it gets saved
+	defer q.Save()
+
 	// TUI
 	var (
 		app  = tview.NewApplication()
 		flex = tview.NewFlex()
 	)
 
+	app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
+		if event.Rune() == 'q' {
+			app.Stop()
+		}
+
+		return event
+	})
 	flex.SetDirection(tview.FlexRow)
 
 	// Borders
@@ -117,6 +127,30 @@ func cmdListen() {
 			SetTitle("[::b] " + block.Name + " ").
 			SetTitleColor(tcell.ColorGreen).
 			SetBorder(true)
+
+		blocktable.SetSelectedFunc(func(row, column int) {
+			cell := blocktable.GetCell(row, column)
+
+			switch column {
+			// Listened
+			case 1:
+				if cell.Text == "" {
+					cell.SetText("✓")
+				} else {
+					cell.SetText("")
+				}
+
+			// Rated
+			case 2:
+				if cell.Text == "" {
+					cell.SetText("✓")
+					q[i].Albums[row-1].Rated = true
+				} else {
+					cell.SetText("")
+					q[i].Albums[row-1].Rated = false
+				}
+			}
+		})
 
 		// Headers
 		albumcell := tview.NewTableCell("Albums")
