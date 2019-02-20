@@ -9,11 +9,12 @@ import (
 )
 
 type tui struct {
-	app     *tview.Application
-	flex    *tview.Flex
-	blocks  []*tview.Table
-	headers []*tview.TableCell
-	queue   *Queue
+	app          *tview.Application
+	flex         *tview.Flex
+	currentblock int
+	blocks       []*tview.Table
+	headers      []*tview.TableCell
+	queue        *Queue
 }
 
 func newTui() *tui {
@@ -120,6 +121,27 @@ func (tui *tui) setupBindings() {
 	tui.app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		if event.Rune() == 'q' {
 			tui.app.Stop()
+		}
+
+		if event.Key() == tcell.KeyTAB {
+			// Reset on last block
+			if tui.currentblock == len(tui.blocks)-1 {
+				tui.currentblock = 0
+			} else {
+				tui.currentblock++
+			}
+
+			tui.app.SetFocus(tui.blocks[tui.currentblock])
+		}
+
+		if event.Key() == tcell.KeyBacktab {
+			if tui.currentblock == 0 {
+				tui.currentblock = len(tui.blocks) - 1
+			} else {
+				tui.currentblock--
+			}
+
+			tui.app.SetFocus(tui.blocks[tui.currentblock])
 		}
 
 		return event
