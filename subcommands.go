@@ -177,6 +177,7 @@ func cmdListen() {
 		flex.AddItem(blocktable, 0, 1, true)
 	}
 
+	// Run the App
 	app.SetRoot(flex, true).SetFocus(flex)
 	if err := app.Run(); err != nil {
 		panic(err)
