@@ -25,6 +25,10 @@ func main() {
 	case "newblock":
 		newblock()
 
+	case "listen":
+		cmdListen()
+
+	case "rate":
 	case "newqueue":
 	default:
 		flag.PrintDefaults()

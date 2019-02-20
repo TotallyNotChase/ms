@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+
+	"github.com/gdamore/tcell"
+	"github.com/rivo/tview"
 )
 
 func status() {
@@ -72,5 +75,106 @@ records:
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
+	}
+}
+
+func cmdListen() {
+	var q = NewQueue()
+
+	if err := q.Load(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	// TUI
+	var (
+		app  = tview.NewApplication()
+		flex = tview.NewFlex()
+	)
+
+	flex.SetDirection(tview.FlexRow)
+
+	// Borders
+	tview.Borders.HorizontalFocus = tview.BoxDrawingsHeavyHorizontal
+	tview.Borders.VerticalFocus = tview.BoxDrawingsHeavyVertical
+	tview.Borders.TopLeftFocus = tview.BoxDrawingsHeavyDownAndRight
+	tview.Borders.TopRightFocus = tview.BoxDrawingsHeavyDownAndLeft
+	tview.Borders.BottomLeftFocus = tview.BoxDrawingsHeavyUpAndRight
+	tview.Borders.BottomRightFocus = tview.BoxDrawingsHeavyUpAndLeft
+
+	// Queue
+	for i, block := range q {
+		// Skip resting week
+		if i == 2 {
+			continue
+		}
+
+		blocktable := tview.NewTable()
+		blocktable.
+			SetSelectable(true, true).
+			SetFixed(1, 3).
+			SetTitle("[::b] " + block.Name + " ").
+			SetTitleAlign(tview.AlignLeft).
+			SetTitleColor(tcell.ColorGreen).
+			SetBorder(true)
+
+		// Headers
+		albumcell := tview.NewTableCell("Albums")
+		albumcell.
+			SetSelectable(false).
+			SetTextColor(tcell.ColorYellow).
+			SetAttributes(tcell.AttrBold)
+
+		listenedcell := tview.NewTableCell("Listened")
+		listenedcell.
+			SetSelectable(false).
+			SetTextColor(tcell.ColorYellow).
+			SetAttributes(tcell.AttrBold)
+
+		ratedcell := tview.NewTableCell("Rated")
+		ratedcell.
+			SetSelectable(false).
+			SetTextColor(tcell.ColorYellow).
+			SetAttributes(tcell.AttrBold)
+
+		blocktable.SetCell(0, 0, albumcell)
+		blocktable.SetCell(0, 1, listenedcell)
+		blocktable.SetCell(0, 2, ratedcell)
+
+		// Albums
+		for j, album := range block.Albums {
+			var listened, rated = "❌", ""
+
+			cell := tview.NewTableCell(album.Name)
+			cell.
+				SetExpansion(1).
+				SetMaxWidth(len(album.Name))
+
+			blocktable.SetCell(j+1, 0, cell)
+
+			if i == 0 && album.FirstListen {
+				listened = "✓"
+			}
+			if i == 1 && album.SecondListen {
+				listened = "✓"
+			}
+			if i == 3 && album.ThirdListen {
+				listened = "✓"
+			}
+
+			if album.Rated {
+				rated = "✓"
+			}
+
+			blocktable.SetCell(j+1, 1, tview.NewTableCell(listened).SetAlign(tview.AlignCenter))
+			blocktable.SetCell(j+1, 2, tview.NewTableCell(rated).SetAlign(tview.AlignCenter))
+		}
+
+		flex.AddItem(blocktable, 0, 1, true)
+	}
+
+	app.SetRoot(flex, true).SetFocus(flex)
+	if err := app.Run(); err != nil {
+		panic(err)
 	}
 }
