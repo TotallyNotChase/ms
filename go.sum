@@ -18,4 +18,5 @@ gitlab.com/Sacules/jsonfile v0.1.0 h1:W817U1hitIRWOw1m8A7RAJw3UnqjxJv2cID+93fuqE
 gitlab.com/Sacules/jsonfile v0.1.0/go.mod h1:8pnBkYIND7OVi75rmkfY43kK0yteB6wm8CTXDr4XFec=
 golang.org/x/text v0.3.0 h1:g61tztE5qeGQ89tm6NTjjM9VPIm088od1l6aSorWRWg=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
+gopkg.in/DATA-DOG/go-sqlmock.v1 v1.3.0 h1:FVCohIoYO7IJoDDVpV2pdq7SgrMH6wHnuTyrdrxJNoY=
 gopkg.in/DATA-DOG/go-sqlmock.v1 v1.3.0/go.mod h1:OdE7CF6DbADk7lN8LIKRzRJTTZXIjtWgA5THM5lhBAw=
