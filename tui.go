@@ -13,7 +13,7 @@ type tui struct {
 	flex    *tview.Flex
 	blocks  []*tview.Table
 	headers []*tview.TableCell
-	queue   Queue
+	queue   *Queue
 }
 
 func newTui() *tui {
@@ -24,7 +24,7 @@ func newTui() *tui {
 	}
 }
 
-func (tui *tui) addBlock() {
+func (tui *tui) addBlocks() {
 	// Queue
 	for i, block := range tui.queue {
 		// Skip resting week
@@ -45,6 +45,9 @@ func (tui *tui) addBlock() {
 		blocktable.SetCell(0, 0, albumcell)
 		blocktable.SetCell(0, 1, listenedcell)
 		blocktable.SetCell(0, 2, ratedcell)
+		tui.headers = append(tui.headers, albumcell)
+		tui.headers = append(tui.headers, listenedcell)
+		tui.headers = append(tui.headers, ratedcell)
 
 		// Albums
 		for j, album := range block.Albums {
@@ -76,6 +79,7 @@ func (tui *tui) addBlock() {
 		}
 
 		tui.flex.AddItem(blocktable, 0, 1, true)
+		tui.blocks = append(tui.blocks, blocktable)
 	}
 }
 
@@ -150,15 +154,6 @@ func (tui *tui) setupBindings() {
 }
 
 func (tui *tui) run() {
-	var q = NewQueue()
-
-	if err := q.Load(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	// Ensure it gets saved
-	defer q.Save()
 	// Run the App
 	tui.app.SetRoot(tui.flex, true).SetFocus(tui.flex)
 	if err := tui.app.Run(); err != nil {
@@ -166,5 +161,17 @@ func (tui *tui) run() {
 	}
 }
 
-func cmdListen() {
+func (tui *tui) init() {
+	var q = NewQueue()
+
+	if err := q.Load(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	tui.queue = q
+
+	tui.addBlocks()
+	tui.setupLooks()
+	tui.setupBindings()
 }
