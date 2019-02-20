@@ -115,7 +115,6 @@ func cmdListen() {
 			SetSelectable(true, true).
 			SetFixed(1, 3).
 			SetTitle("[::b] " + block.Name + " ").
-			SetTitleAlign(tview.AlignLeft).
 			SetTitleColor(tcell.ColorGreen).
 			SetBorder(true)
 
@@ -145,7 +144,7 @@ func cmdListen() {
 
 		// Albums
 		for j, album := range block.Albums {
-			var listened, rated = "❌", ""
+			var listened, rated string
 
 			cell := tview.NewTableCell(album.Name)
 			cell.
