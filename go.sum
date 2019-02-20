@@ -1,0 +1,8 @@
+github.com/adrg/xdg v0.0.0-20150127102731-eb9d5413b060 h1:V5NsHC7PmxB/KyA3dCr4KVK793ZqOc8Thgr96MjCt8k=
+github.com/adrg/xdg v0.0.0-20150127102731-eb9d5413b060/go.mod h1:ZuOshBmzV4Ta+s23hdfFZnBsdzmoR3US0d7ErpqSbTQ=
+github.com/google/go-cmp v0.2.0 h1:+dTQ8DZQJz0Mb/HjFlkptS1FeQ4cWSnN941F8aEG4SQ=
+github.com/google/go-cmp v0.2.0/go.mod h1:oXzfMopK8JAjlY9xF4vHSVASa0yLyX7SntLO5aqRK0M=
+github.com/shkh/lastfm-go v0.0.0-20180729041255-29483feae857 h1:q7kJEIYmlHvNdUUxDcHdP+HalJMxiUO1ceJho9fe4rE=
+github.com/shkh/lastfm-go v0.0.0-20180729041255-29483feae857/go.mod h1:n3nudMl178cEvD44PaopxH9jhJaQzthSxUzLO5iKMy4=
+gitlab.com/Sacules/jsonfile v0.1.0 h1:W817U1hitIRWOw1m8A7RAJw3UnqjxJv2cID+93fuqEM=
+gitlab.com/Sacules/jsonfile v0.1.0/go.mod h1:8pnBkYIND7OVi75rmkfY43kK0yteB6wm8CTXDr4XFec=
