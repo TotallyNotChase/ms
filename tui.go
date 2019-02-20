@@ -173,6 +173,18 @@ func (tui *tui) setupBindings() {
 					cell.SetText("")
 				}
 
+				// TODO: Add method to get current album
+				switch tui.currentblock {
+				case 0:
+					tui.queue[blocknum].Albums[row-1].FirstListen = !tui.queue[blocknum].Albums[row-1].FirstListen
+
+				case 1:
+					tui.queue[blocknum].Albums[row-1].SecondListen = !tui.queue[blocknum].Albums[row-1].SecondListen
+
+				case 2:
+					tui.queue[blocknum].Albums[row-1].ThirdListen = !tui.queue[blocknum].Albums[row-1].ThirdListen
+				}
+
 			// Rated
 			case 2:
 				if cell.Text == "" {
