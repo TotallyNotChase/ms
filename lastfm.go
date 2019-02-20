@@ -31,10 +31,10 @@ func InitAPI() *lastfm.Api {
 
 // Load the keys from a JSON file.
 func (a *APIKey) Load() error {
-	return jsonfile.LoadFile(a, "apikey.json")
+	return jsonfile.Load(a, "apikey.json")
 }
 
 // Save the keys to a JSON file.
 func (a *APIKey) Save() error {
-	return jsonfile.SaveFile(a, "apikey.json")
+	return jsonfile.Save(a, "apikey.json")
 }

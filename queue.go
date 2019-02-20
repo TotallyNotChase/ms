@@ -38,7 +38,7 @@ func (q *Queue) Load() error {
 		return err
 	}
 
-	return jsonfile.LoadFile(q, xdg.ConfigHome+app+"/current.json")
+	return jsonfile.Load(q, xdg.ConfigHome+app+"/current.json")
 }
 
 // Replace goes through the queue and replaces an album for a new one.
@@ -55,7 +55,7 @@ func (q *Queue) Save() error {
 		return err
 	}
 
-	return jsonfile.SaveFile(q, xdg.ConfigHome+app+"/current.json")
+	return jsonfile.Save(q, xdg.ConfigHome+app+"/current.json")
 }
 
 // ShowCurrent prints the current week of records in the queue.
