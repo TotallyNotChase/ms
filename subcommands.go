@@ -109,6 +109,7 @@ func cmdListen() {
 			continue
 		}
 
+		// Each block
 		blocktable := tview.NewTable()
 		blocktable.
 			SetSelectable(true, true).
@@ -137,6 +138,7 @@ func cmdListen() {
 			SetTextColor(tcell.ColorYellow).
 			SetAttributes(tcell.AttrBold)
 
+		// Add headers
 		blocktable.SetCell(0, 0, albumcell)
 		blocktable.SetCell(0, 1, listenedcell)
 		blocktable.SetCell(0, 2, ratedcell)
@@ -152,6 +154,7 @@ func cmdListen() {
 
 			blocktable.SetCell(j+1, 0, cell)
 
+			// Check per block
 			if i == 0 && album.FirstListen {
 				listened = "✓"
 			}
@@ -161,13 +164,14 @@ func cmdListen() {
 			if i == 3 && album.ThirdListen {
 				listened = "✓"
 			}
-
 			if album.Rated {
 				rated = "✓"
 			}
 
-			blocktable.SetCell(j+1, 1, tview.NewTableCell(listened).SetAlign(tview.AlignCenter))
-			blocktable.SetCell(j+1, 2, tview.NewTableCell(rated).SetAlign(tview.AlignCenter))
+			blocktable.SetCell(j+1, 1, tview.NewTableCell(listened).
+				SetAlign(tview.AlignCenter))
+			blocktable.SetCell(j+1, 2, tview.NewTableCell(rated).
+				SetAlign(tview.AlignCenter))
 		}
 
 		flex.AddItem(blocktable, 0, 1, true)
