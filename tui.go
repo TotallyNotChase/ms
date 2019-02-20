@@ -151,9 +151,18 @@ func (tui *tui) setupBindings() {
 	})
 
 	// Per-block binds
-	for i, blocktable := range tui.blocks {
+	for _, blocktable := range tui.blocks {
 		blocktable.SetSelectedFunc(func(row, column int) {
-			cell := blocktable.GetCell(row, column)
+			// Only act on the focused block
+			current := tui.blocks[tui.currentblock]
+
+			cell := current.GetCell(row, column)
+
+			// Check since there's a block we're skipping
+			blocknum := tui.currentblock
+			if blocknum == 2 {
+				blocknum = 3
+			}
 
 			switch column {
 			// Listened
@@ -168,10 +177,10 @@ func (tui *tui) setupBindings() {
 			case 2:
 				if cell.Text == "" {
 					cell.SetText("✓")
-					tui.queue[i].Albums[row-1].Rated = true
+					tui.queue[blocknum].Albums[row-1].Rated = true
 				} else {
 					cell.SetText("")
-					tui.queue[i].Albums[row-1].Rated = false
+					tui.queue[blocknum].Albums[row-1].Rated = false
 				}
 			}
 		})
@@ -183,6 +192,11 @@ func (tui *tui) run() {
 	tui.app.SetRoot(tui.flex, true).SetFocus(tui.flex)
 	if err := tui.app.Run(); err != nil {
 		panic(err)
+	}
+
+	if err := tui.queue.Save(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
 	}
 }
 
