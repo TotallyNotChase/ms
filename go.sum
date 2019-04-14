@@ -10,8 +10,10 @@ github.com/lucasb-eyer/go-colorful v0.0.0-20181028223441-12d3b2882a08 h1:5MnxBC1
 github.com/lucasb-eyer/go-colorful v0.0.0-20181028223441-12d3b2882a08/go.mod h1:NXg0ArsFk0Y01623LgUqoqcouGDB+PwCCQlrwrG6xJ4=
 github.com/mattn/go-runewidth v0.0.4 h1:2BvfKmzob6Bmd4YsL0zygOqfdFnK7GR4QL06Do4/p7Y=
 github.com/mattn/go-runewidth v0.0.4/go.mod h1:LwmH8dsx7+W8Uxz3IHJYH5QSwggIsqBzpuz5H//U1FU=
-github.com/rivo/tview v0.0.0-20190213202703-b373355e9db4 h1:Mv2TAXrprnjUP9PxPIXTvRUFgSkiE/8MkUqoRPyEO8Q=
-github.com/rivo/tview v0.0.0-20190213202703-b373355e9db4/go.mod h1:J4W+hErFfITUbyFAEXizpmkuxX7ZN56dopxHB4XQhMw=
+github.com/rivo/tview v0.0.0-20190406182340-90b4da1bd64c h1:g/UvEDB8RutkfYbTULmcCUpN0uQCVeh6j4bHt+Te8yM=
+github.com/rivo/tview v0.0.0-20190406182340-90b4da1bd64c/go.mod h1:J4W+hErFfITUbyFAEXizpmkuxX7ZN56dopxHB4XQhMw=
+github.com/rivo/uniseg v0.0.0-20190313204849-f699dde9c340 h1:nOZbL5f2xmBAHWYrrHbHV1xatzZirN++oOQ3g83Ypgs=
+github.com/rivo/uniseg v0.0.0-20190313204849-f699dde9c340/go.mod h1:SOLvOL4ybwgLJ6TYoX/rtaJ8EGOulH4XU7E9/TLrTCE=
 github.com/shkh/lastfm-go v0.0.0-20180729041255-29483feae857 h1:q7kJEIYmlHvNdUUxDcHdP+HalJMxiUO1ceJho9fe4rE=
 github.com/shkh/lastfm-go v0.0.0-20180729041255-29483feae857/go.mod h1:n3nudMl178cEvD44PaopxH9jhJaQzthSxUzLO5iKMy4=
 gitlab.com/Sacules/jsonfile v0.1.0 h1:W817U1hitIRWOw1m8A7RAJw3UnqjxJv2cID+93fuqEM=
