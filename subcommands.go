@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+
+	ms "gitlab.com/sacules/ms/schedule"
 )
 
 func status() {
-	var q = new(Queue)
+	var q = new(ms.Queue)
 	err := q.Load()
 	if err != nil {
 		if q.Save() != nil {
@@ -24,7 +26,7 @@ func status() {
 func newblock() {
 	var (
 		scanner = bufio.NewScanner(os.Stdin)
-		q       = new(Queue)
+		q       = new(ms.Queue)
 	)
 
 	err := q.Load()
@@ -52,7 +54,7 @@ records:
 		goto records
 	}
 
-	albums := make([]Album, n)
+	albums := make([]ms.Album, n)
 
 	for i := 0; i < n; i++ {
 		fmt.Printf("Album %d: ", i+1)
@@ -65,7 +67,7 @@ records:
 		albums[i].Name = al
 	}
 
-	b := &Block{name, albums}
+	b := &ms.Block{name, albums}
 	q.Add(b)
 
 	err = q.Save()

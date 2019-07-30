@@ -6,6 +6,7 @@ import (
 
 	"github.com/gdamore/tcell"
 	"github.com/rivo/tview"
+	ms "gitlab.com/sacules/ms/schedule"
 )
 
 type tui struct {
@@ -14,7 +15,7 @@ type tui struct {
 	currentblock int
 	blocks       []*tview.Table
 	headers      []*tview.TableCell
-	queue        *Queue
+	queue        *ms.Queue
 }
 
 func newTui() *tui {
@@ -213,7 +214,7 @@ func (tui *tui) run() {
 }
 
 func (tui *tui) init() {
-	var q = new(Queue)
+	var q = new(ms.Queue)
 
 	if err := q.Load(); err != nil {
 		fmt.Println(err)
