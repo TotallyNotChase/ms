@@ -8,7 +8,7 @@ import (
 )
 
 func status() {
-	var q = NewQueue()
+	var q = new(Queue)
 	err := q.Load()
 	if err != nil {
 		if q.Save() != nil {
@@ -24,7 +24,7 @@ func status() {
 func newblock() {
 	var (
 		scanner = bufio.NewScanner(os.Stdin)
-		q       = NewQueue()
+		q       = new(Queue)
 	)
 
 	err := q.Load()

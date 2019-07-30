@@ -213,7 +213,7 @@ func (tui *tui) run() {
 }
 
 func (tui *tui) init() {
-	var q = NewQueue()
+	var q = new(Queue)
 
 	if err := q.Load(); err != nil {
 		fmt.Println(err)

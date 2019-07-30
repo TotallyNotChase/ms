@@ -17,11 +17,6 @@ const (
 // Queue is the overall scheduler, consisting of 4 blocks.
 type Queue [4]*Block
 
-// NewQueue returns a pointer to an empty Queue.
-func NewQueue() *Queue {
-	return &Queue{}
-}
-
 // Add a block to the queue and get rid of any old ones.
 func (q *Queue) Add(b *Block) {
 	for i := len(q) - 1; i > 0; i-- {
