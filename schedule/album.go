@@ -1,4 +1,4 @@
-package main
+package schedule
 
 // Album is a record to be scheduled. Includes whether it's been listened
 // or rated.
