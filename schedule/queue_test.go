@@ -31,7 +31,7 @@ func TestAddBlock(t *testing.T) {
 	qLocal.Add(b)
 
 	if !cmp.Equal(qLocal, q) {
-		t.Error("ms | Error with AddBlock: didn't add properly")
+		t.Error("didn't add properly")
 	}
 
 	q2 := &Queue{}
@@ -39,6 +39,6 @@ func TestAddBlock(t *testing.T) {
 	q3 := &Queue{b}
 
 	if !cmp.Equal(q2, q3) {
-		t.Error("ms | Error with AddBlock: couldn't add properly to empty queue")
+		t.Error("couldn't add properly to empty queue")
 	}
 }

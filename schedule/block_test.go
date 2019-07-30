@@ -14,6 +14,16 @@ var (
 	bRef = Block{name, al}
 )
 
+func TestAddAlbum(t *testing.T) {
+	block := new(Block)
+	album := Album{Name: "Converge - Jane Doe"}
+
+	block.Add(album)
+	if block.Albums[0] != album {
+		t.Errorf("expected album %v, got %v", album, block.Albums[0])
+	}
+}
+
 func TestRemoveAlbum(t *testing.T) {
 	tmp := bRef
 	b := &tmp
