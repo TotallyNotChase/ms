@@ -6,15 +6,6 @@ type Block struct {
 	Albums []Album `json:"albums"`
 }
 
-// NewBlock inits a block with a name, usually the current week, and the
-// albums it should include.
-func NewBlock(name string, albums ...Album) *Block {
-	return &Block{
-		Name:   name,
-		Albums: albums,
-	}
-}
-
 // Add an album to the block.
 func (b *Block) Add(al Album) {
 	b.Albums = append(b.Albums, al)

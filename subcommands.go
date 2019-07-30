@@ -65,7 +65,7 @@ records:
 		albums[i].Name = al
 	}
 
-	b := NewBlock(name, albums...)
+	b := &Block{name, albums}
 	q.Add(b)
 
 	err = q.Save()

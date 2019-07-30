@@ -9,8 +9,3 @@ type Album struct {
 	ThirdListen  bool   `json:"third_listen"`
 	Rated        bool   `json:"rated"`
 }
-
-// NewAlbum returns a pointer to an empty Album.
-func NewAlbum(al string) Album {
-	return Album{Name: al}
-}

@@ -8,23 +8,11 @@ import (
 
 var (
 	name = "nice"
-	foo  = NewAlbum("foo")
-	bar  = NewAlbum("bar")
+	foo  = Album{Name: "foo"}
+	bar  = Album{Name: "bar"}
 	al   = []Album{foo, bar}
 	bRef = Block{name, al}
 )
-
-func TestNewBlock(t *testing.T) {
-	bNew := NewBlock(name, foo, bar)
-
-	if bNew == nil {
-		t.Error("ms | Error with NewBlock: nil pointer")
-	}
-
-	if !cmp.Equal(&bRef, bNew) {
-		t.Error("ms | Error with NewBlock: generated struct not equal to testing one")
-	}
-}
 
 func TestRemoveAlbum(t *testing.T) {
 	tmp := bRef
@@ -38,7 +26,7 @@ func TestRemoveAlbum(t *testing.T) {
 	b.RemoveAlbum(bar)
 
 	if !cmp.Equal(b, bLess) {
-		t.Error("ms | Error with RemoveAlbum: generated struct not equal to testing one")
+		t.Error("remove album: generated struct not equal to testing one")
 
 		t.Error("Reference:")
 		for i, album := range bLess.Albums {
@@ -55,7 +43,7 @@ func TestRemoveAlbum(t *testing.T) {
 	bEmpty.RemoveAlbum(foo)
 
 	if !cmp.Equal(bEmpty, &Block{}) {
-		t.Error("ms | Error with RemoveAlbum: not working on empty block")
+		t.Error("remove album: not working on empty block")
 	}
 }
 
@@ -71,6 +59,6 @@ func TestReplaceAlbum(t *testing.T) {
 	b.ReplaceAlbum(bar, foo)
 
 	if !cmp.Equal(b, bReplaced) {
-		t.Error("ms | Error with ReplaceAlbum: generated struct not equal to testing one")
+		t.Error("replac albumm: generated struct not equal to testing one")
 	}
 }

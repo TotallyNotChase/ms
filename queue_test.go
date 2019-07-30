@@ -9,10 +9,10 @@ import (
 
 var (
 	qRef = Queue{
-		NewBlock("week 4", NewAlbum("nice"), NewAlbum("nice")),
-		NewBlock("week 3", NewAlbum("placeholder")),
-		NewBlock("week 2", NewAlbum("fizz"), NewAlbum("buzz"), NewAlbum("fizbuzz")),
-		NewBlock("week 1", NewAlbum("foo"), NewAlbum("bar"), NewAlbum("foobar")),
+		&Block{"week 4", []Album{Album{Name: "nice"}, Album{Name: "nice"}}},
+		&Block{"week 3", []Album{Album{Name: "placeholder"}}},
+		&Block{"week 2", []Album{Album{Name: "fizz"}, Album{Name: "buzz"}, Album{Name: "fizbuzz"}}},
+		&Block{"week 1", []Album{Album{Name: "foo"}, Album{Name: "bar"}, Album{Name: "foobar"}}},
 	}
 )
 
@@ -20,13 +20,13 @@ func TestAddBlock(t *testing.T) {
 	tmp := qRef
 	qLocal := &tmp
 
-	b := NewBlock("week 5", NewAlbum("darude - sandstorm"))
+	b := &Block{"week 5", []Album{Album{Name: "darude - sandstorm"}}}
 
 	q := &Queue{
 		b,
-		NewBlock("week 4", NewAlbum("nice"), NewAlbum("nice")),
-		NewBlock("week 3", NewAlbum("placeholder")),
-		NewBlock("week 2", NewAlbum("fizz"), NewAlbum("buzz"), NewAlbum("fizbuzz")),
+		&Block{"week 4", []Album{Album{Name: "nice"}, Album{Name: "nice"}}},
+		&Block{"week 3", []Album{Album{Name: "placeholder"}}},
+		&Block{"week 2", []Album{Album{Name: "fizz"}, Album{Name: "buzz"}, Album{Name: "fizbuzz"}}},
 	}
 
 	qLocal.Add(b)
