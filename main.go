@@ -4,11 +4,6 @@ import (
 	"os"
 )
 
-var (
-	// Flags
-	verbose bool
-)
-
 func main() {
 	if len(os.Args) > 1 {
 		if os.Args[1] == "newblock" {
