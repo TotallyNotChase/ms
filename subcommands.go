@@ -9,20 +9,6 @@ import (
 	ms "gitlab.com/sacules/ms/schedule"
 )
 
-func status() {
-	var q = new(ms.Queue)
-	err := q.Load()
-	if err != nil {
-		if q.Save() != nil {
-			fmt.Println(err)
-		}
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	q.ShowCurrent()
-}
-
 func newblock() {
 	var (
 		scanner = bufio.NewScanner(os.Stdin)
