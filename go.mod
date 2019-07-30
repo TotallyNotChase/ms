@@ -1,4 +1,4 @@
-module gitlab.com/Sacules/ms
+module gitlab.com/sacules/ms
 
 go 1.12
 
