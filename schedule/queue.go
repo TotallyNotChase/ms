@@ -1,12 +1,20 @@
 package schedule
 
 import (
+	"path/filepath"
+
 	"github.com/adrg/xdg"
 	"gitlab.com/Sacules/jsonfile"
 )
 
 const (
-	app = "/ms"
+	app      = "ms"
+	savefile = "current.json"
+)
+
+var (
+	dataDir  = filepath.Join(xdg.DataHome, app)
+	dataPath = filepath.Join(dataDir, savefile)
 )
 
 // Queue is the overall scheduler, consisting of 4 blocks.
@@ -23,12 +31,12 @@ func (q *Queue) Add(b *Block) {
 
 // Load queue from disk.
 func (q *Queue) Load() error {
-	err := createDirNotExist(xdg.ConfigHome + app)
+	err := createDirNotExist(dataDir)
 	if err != nil {
 		return err
 	}
 
-	return jsonfile.Load(q, xdg.ConfigHome+app+"/current.json")
+	return jsonfile.Load(q, dataPath)
 }
 
 // Replace goes through the queue and replaces an album for a new one.
@@ -40,10 +48,10 @@ func (q *Queue) Replace(old, actual Album) {
 
 // Save queue to disk.
 func (q *Queue) Save() error {
-	err := createDirNotExist(xdg.ConfigHome + app)
+	err := createDirNotExist(dataDir)
 	if err != nil {
 		return err
 	}
 
-	return jsonfile.Save(q, xdg.ConfigHome+app+"/current.json")
+	return jsonfile.Save(q, dataPath)
 }
