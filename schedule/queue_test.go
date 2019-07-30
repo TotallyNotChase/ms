@@ -1,7 +1,6 @@
 package schedule
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -33,12 +32,6 @@ func TestAddBlock(t *testing.T) {
 
 	if !cmp.Equal(qLocal, q) {
 		t.Error("ms | Error with AddBlock: didn't add properly")
-
-		fmt.Println("Reference:")
-		qRef.ShowCurrent()
-
-		fmt.Println("\nNew:")
-		q.ShowCurrent()
 	}
 
 	q2 := &Queue{}

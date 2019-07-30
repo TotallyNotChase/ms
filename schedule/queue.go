@@ -1,11 +1,6 @@
 package schedule
 
 import (
-	"fmt"
-	"os"
-	"strings"
-	"text/tabwriter"
-
 	"github.com/adrg/xdg"
 	"gitlab.com/Sacules/jsonfile"
 )
@@ -51,63 +46,4 @@ func (q *Queue) Save() error {
 	}
 
 	return jsonfile.Save(q, xdg.ConfigHome+app+"/current.json")
-}
-
-// ShowCurrent prints the current week of records in the queue.
-func (q *Queue) ShowCurrent() {
-	var (
-		w       = tabwriter.NewWriter(os.Stdout, 0, 8, 2, '\t', 0)
-		blankln = "\t\t\n"
-		headers = []string{
-			"Block",
-			"Listened",
-			"Rated",
-		}
-		underlined    = make([]string, len(headers))
-		headerstabbed = strings.Join(headers, "\t")
-	)
-	defer w.Flush()
-
-	// Calculate the right amount of underlines
-	for i, h := range headers {
-		underlined[i] = strings.Repeat("-", len(h))
-	}
-	underlinedtabbed := strings.Join(underlined, "\t")
-
-	fmt.Fprintln(w, headerstabbed+"\n"+underlinedtabbed)
-	for i, block := range q {
-		if block != nil && i != 2 {
-			fmt.Fprintf(w, "%s\t\t\n", block.Name)
-			for _, album := range block.Albums {
-				var (
-					listened = "❌"
-					rated    = " "
-				)
-
-				switch i {
-				case 0:
-					if album.FirstListen {
-						listened = "✓"
-					}
-
-				case 1:
-					if album.SecondListen {
-						listened = "✓"
-					}
-
-				case 3:
-					if album.ThirdListen {
-						listened = "✓"
-					}
-				}
-
-				if album.Rated {
-					rated = "✓"
-				}
-
-				fmt.Fprintf(w, "• %s\t%s\t%s\n", album.Name, listened, rated)
-			}
-			fmt.Fprintf(w, blankln)
-		}
-	}
 }
