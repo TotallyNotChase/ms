@@ -23,7 +23,7 @@ func TestRemoveAlbum(t *testing.T) {
 		Albums: []Album{foo},
 	}
 
-	b.RemoveAlbum(bar)
+	b.Remove(bar)
 
 	if !cmp.Equal(b, bLess) {
 		t.Error("remove album: generated struct not equal to testing one")
@@ -40,7 +40,7 @@ func TestRemoveAlbum(t *testing.T) {
 	}
 
 	bEmpty := &Block{}
-	bEmpty.RemoveAlbum(foo)
+	bEmpty.Remove(foo)
 
 	if !cmp.Equal(bEmpty, &Block{}) {
 		t.Error("remove album: not working on empty block")
@@ -56,7 +56,7 @@ func TestReplaceAlbum(t *testing.T) {
 		Albums: []Album{foo, foo},
 	}
 
-	b.ReplaceAlbum(bar, foo)
+	b.Replace(bar, foo)
 
 	if !cmp.Equal(b, bReplaced) {
 		t.Error("replac albumm: generated struct not equal to testing one")

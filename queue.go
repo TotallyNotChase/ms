@@ -39,7 +39,7 @@ func (q *Queue) Load() error {
 // Replace goes through the queue and replaces an album for a new one.
 func (q *Queue) Replace(old, actual Album) {
 	for _, block := range q {
-		block.ReplaceAlbum(old, actual)
+		block.Replace(old, actual)
 	}
 }
 
