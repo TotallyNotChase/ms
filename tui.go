@@ -7,6 +7,7 @@ import (
 	"github.com/gdamore/tcell"
 	"github.com/rivo/tview"
 	ms "gitlab.com/sacules/ms/schedule"
+	"strings"
 )
 
 type tui struct {
@@ -74,6 +75,7 @@ func (tui *tui) addBlocks() {
 			}
 			if album.Rated {
 				rated = "✓"
+				cell.Text = "[::d]" + cell.Text
 			}
 
 			blocktable.SetCell(j+1, 1, tview.NewTableCell(listened).SetAlign(tview.AlignCenter))
@@ -191,9 +193,13 @@ func (tui *tui) setupBindings() {
 				if cell.Text == "" {
 					cell.SetText("✓")
 					tui.queue[blocknum].Albums[row-1].Rated = true
+					namecell := current.GetCell(row, 0)
+					namecell.Text = "[::d]" + namecell.Text
 				} else {
 					cell.SetText("")
 					tui.queue[blocknum].Albums[row-1].Rated = false
+					namecell := current.GetCell(row, 0)
+					namecell.Text = strings.ReplaceAll(namecell.Text, "[::d]", "")
 				}
 			}
 		})
