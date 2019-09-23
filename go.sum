@@ -5,6 +5,10 @@ github.com/adrg/xdg v0.0.0-20190319220657-88e5137d2444/go.mod h1:ZuOshBmzV4Ta+s2
 github.com/gdamore/encoding v1.0.0 h1:+7OoQ1Bc6eTm5niUzBa0Ctsh6JbMW6Ra+YNuAtDBdko=
 github.com/gdamore/encoding v1.0.0/go.mod h1:alR0ol34c49FCSBLjhosxzcPHQbf2trDkoo5dl+VrEg=
 github.com/gdamore/tcell v1.1.2/go.mod h1:h3kq4HO9l2On+V9ed8w8ewqQEmGCSSHOgQ+2h8uzurE=
+github.com/gdamore/tcell v1.2.1-0.20190730054704-fef653e8d0c9 h1:uH0EYxHYlyJfL5td1QDQ0TtaMvUhUO7nGzBx0tMHbgI=
+github.com/gdamore/tcell v1.2.1-0.20190730054704-fef653e8d0c9/go.mod h1:Hjvr+Ofd+gLglo7RYKxxnzCBmev3BzsS67MebKS4zMM=
+github.com/gdamore/tcell v1.2.1-0.20190805162843-ae1dc54d2c70 h1:nVrHMTQjRTBrp8dmPNuMl9zrKdaKGZOo1qaChsT+nzU=
+github.com/gdamore/tcell v1.2.1-0.20190805162843-ae1dc54d2c70/go.mod h1:Hjvr+Ofd+gLglo7RYKxxnzCBmev3BzsS67MebKS4zMM=
 github.com/gdamore/tcell v1.3.0 h1:r35w0JBADPZCVQijYebl6YMWWtHRqVEGt7kL2eBADRM=
 github.com/gdamore/tcell v1.3.0/go.mod h1:Hjvr+Ofd+gLglo7RYKxxnzCBmev3BzsS67MebKS4zMM=
 github.com/google/go-cmp v0.3.1 h1:Xye71clBPdm5HgqGwUkwhbynsUJZhDbS20FvLhQ2izg=
