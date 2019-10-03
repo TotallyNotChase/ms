@@ -42,3 +42,38 @@ func TestAddBlock(t *testing.T) {
 		t.Error("couldn't add properly to empty queue")
 	}
 }
+
+func TestSaveAndLoadQueue(t *testing.T) {
+	tmp := qRef
+	qLocal := &tmp
+
+	b := &Block{"week 5", []Album{Album{Name: "darude - sandstorm"}}}
+
+	q := &Queue{
+		b,
+		&Block{"week 4", []Album{Album{Name: "nice"}, Album{Name: "nice"}}},
+		&Block{"week 3", []Album{Album{Name: "placeholder"}}},
+		&Block{"week 2", []Album{Album{Name: "fizz"}, Album{Name: "buzz"}, Album{Name: "fizbuzz"}}},
+	}
+
+	qLocal.Add(b)
+
+	if !cmp.Equal(qLocal, q) {
+		t.Error("didn't add properly")
+	}
+
+	err := qLocal.Save()
+	if err != nil {
+		t.Error("expect no error but error when save queue")
+	}
+
+	loadedQueue := &Queue{}
+	err = loadedQueue.Load()
+	if err != nil {
+		t.Error("expect no error but error when load queue")
+	}
+
+	if !cmp.Equal(loadedQueue, qLocal) {
+		t.Error("saved and loaded queue not same")
+	}
+}
