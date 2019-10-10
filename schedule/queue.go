@@ -1,20 +1,7 @@
 package schedule
 
 import (
-	"path/filepath"
-
-	"github.com/adrg/xdg"
 	"gitlab.com/Sacules/jsonfile"
-)
-
-const (
-	app      = "ms"
-	savefile = "current.json"
-)
-
-var (
-	dataDir  = filepath.Join(xdg.DataHome, app)
-	dataPath = filepath.Join(dataDir, savefile)
 )
 
 // Queue is the overall scheduler, consisting of 4 blocks.
