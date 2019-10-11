@@ -27,6 +27,11 @@ func newTui() *tui {
 	}
 }
 
+func removeLock() int {
+    defer os.Remove("ms.lock")
+    return 1
+}
+
 func (tui *tui) addBlocks() {
 	// Queue
 	for i, block := range tui.queue {
@@ -215,7 +220,7 @@ func (tui *tui) run() {
 
 	if err := tui.queue.Save(); err != nil {
 		fmt.Println(err)
-		os.Exit(1)
+		os.Exit(removeLock())
 	}
 }
 
@@ -224,7 +229,7 @@ func (tui *tui) init() {
 
 	if err := q.Load(); err != nil {
 		fmt.Println(err)
-		os.Exit(1)
+		os.Exit(removeLock()
 	}
 
 	tui.queue = q
