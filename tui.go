@@ -222,7 +222,14 @@ func (tui *tui) run() {
 func (tui *tui) init() {
 	var q = new(ms.Queue)
 
-	if err := q.Load(); err != nil {
+	err := ms.SetDataPath()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+
+	}
+
+	if err = q.Load(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
