@@ -3,6 +3,7 @@ package main
 import (
 	"os"
   	"os/signal"
+	"fmt"
 )
 
 func main() {
